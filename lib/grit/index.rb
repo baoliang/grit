@@ -144,7 +144,9 @@ module Grit
       contents << ['committer', committer.output(committed_date)].join(' ')
       contents << ''
       contents << message
-
+      contents.each do |content|
+        content.force_encoding("UTF-8")
+      end
       contents = contents.join("\n")
       @last_commit_size = contents.size
       commit_sha1 = self.repo.git.put_raw_object(contents, 'commit')
